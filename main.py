@@ -22,9 +22,9 @@ class ImageManipulator:
 
         self.select_image()
         try:
-            self.new_width, self.new_height = int(input('Please enter width:\n')), int(input('Please enter height:\n'))
+            self.size = map(int,input('Please enter width and height:\n').split(' '))
             self.new_name_image = input('Please new name image: \n')
-            self.new_image = self.path_image.resize((self.new_width, self.new_height))
+            self.new_image = self.path_image.resize(size=tuple(self.size))
             self.new_image.save(f'new_image/{self.new_name_image}')
 
         except ValueError:
@@ -32,11 +32,6 @@ class ImageManipulator:
 
     def create_image(self, mode: str = 'RGB', size: tuple = (100, 100), color='blue', name='image.jpg'):
         """this inputs are for  query user  parameters for create image"""
-        self.mode = input('Please enter color mode for image:\n')
-        self.width, self.height = int(input('Please enter width \n')), int(input('Please enter height \n'))
-        self.color = input('Please enter color  for image:\n')
-        self.name_image = input('Please enter name image:\n')
-
         self.image = Image.new(mode=mode, size=size, color=color)
         self.image.save(name)
 
@@ -47,8 +42,7 @@ class ImageManipulator:
             case '1':
                 return self.resize_image()
             case '2':
-                self.create_image(mode=self.mode, size=(self.width, self.height), color=self.color,
-                                  name=self.name_image)
+                ...
             case '3':
                 self.exit_program()
             case _:
